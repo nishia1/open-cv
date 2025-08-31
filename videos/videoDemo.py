@@ -50,6 +50,36 @@ def videoFromFile():
     cap.release()
     cv.destroyAllWindows()
 
+def writeVideoToFile():
+    # only have one webcam, so should be 0
+    cap = cv.VideoCapture(0)
+
+    # compression format of how im storing the video
+    # robust codec for avi: '*XVID'
+    # *'mp4v' for mp4
+    fourcc =  cv.VideoWriter_fourcc(*'mp4v')
+    
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    outPath = os.path.join(script_dir, "output.mp4")
+
+    # takes in path, codec, fps, frame size
+    out = cv.VideoWriter(outPath, fourcc, 20.0, (640, 480))
+
+    while cap.isOpened():
+        ret, frame = cap.read()
+        if ret:
+            out.write(frame)
+            cv.imshow('Webcam', frame)
+        
+        # wait one millsecond and see if 'q' key is pressed
+        if cv.waitKey(1) == ord('q'):
+            break
+    # release webcam
+    cap.release()
+    out.release()
+    # close all windows
+    cv.destroyAllWindows()
+
 if __name__ == '__main__':
     # videoFromWebcam()
-    videoFromFile()
+    writeVideoToFile()
