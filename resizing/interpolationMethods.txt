@@ -1,0 +1,8 @@
+various kinds of methods or interpolations
+
+1. 1d nearest neighbour - choosing closest pixel
+2. linear
+3. cubic
+4. 2d nearest neighbour
+5. bilinear - linear interpolation between 2 points
+6. bicubic
